@@ -1,0 +1,17 @@
+{
+  "name": "air-e",
+  "version": "1.0.0",
+  "main": "air-e.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1"
+  }
+}

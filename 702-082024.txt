@@ -1,1 +1,0 @@
-{"apto":"702","fecha_actual":"2024-08-25","lectura_actual":"4529","fecha_anterior":"2024-07-18","lectura_anterior":"4032","dias_facturados":"30","valor_factura":"523000","nochesRentadas":"24","consumoTotal":497,"kwDia":20,"valorKw":1052,"valorDia":21791}

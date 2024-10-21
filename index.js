@@ -1,12 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const dotenv = require('dotenv')
 const router = require('./routes/main.js')
 const path = require('path')
 const exp = require('constants')
 const cors = require('cors')
 
 const app = express()
-process.loadEnvFile()
+dotenv.config({ path: './config.env' })
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(connection => {
@@ -18,12 +19,12 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
 
-app.use('/', router)
 
+app.set('port', process.env.PORT || 3000)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, './views'))
 
-app.set('port', process.env.PORT || 3000)
+app.use('/', router)
 
 app.listen(app.get('port'), () => {
   console.log('Conectados')

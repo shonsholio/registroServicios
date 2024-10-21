@@ -29,11 +29,6 @@ router.get('/logIn/recibosAire', async(req,res) => {
 router.post('/nuevaFactura', async(req,res) => {
 
   const bill = { ...req.body }
-
-  let consumo = bill.lectura_actual - bill.lectura_anterior
-  let valorKw = Math.floor(bill.valor_factura / consumo)
-  let consumoDia = Math.floor(consumo / bill.nochesRentadas)
-  let valorDia = Math.floor(bill.valor_factura / bill.nochesRentadas)
   
   try {
     factura.create({ 
@@ -42,12 +37,7 @@ router.post('/nuevaFactura', async(req,res) => {
       lectura_actual: bill.lectura_actual,
       fecha_anterior: bill.fecha_anterior,
       dias_facturados: bill.dias_facturados,
-      valor_factura: bill.valor_factura,
-      nochesRentadas: bill.nochesRentadas,
-      consumoTotal: consumo,
-      kwDia: consumoDia,
-      valorKw: valorKw,
-      valorDia: valorDia
+      valor_factura: bill.valor_factura
     })
   } catch {}
 

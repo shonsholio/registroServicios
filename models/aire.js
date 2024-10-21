@@ -7,12 +7,7 @@ const UserScheme = new mongoose.Schema({
   fecha_anterior: String,
   lectura_anterior: Number,
   dias_facturados: Number,
-  valor_factura: Number,
-  nochesRentadas: Number,
-  consumoTotal: Number,
-  kwDia: Number,
-  valorKw: Number,
-  valorDia: Number
+  valor_factura: Number
 
 })
 

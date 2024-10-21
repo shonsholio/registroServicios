@@ -1,0 +1,29 @@
+  nochesRentadas: Number,
+  consumoTotal: Number,
+  kwDia: Number,
+  valorKw: Number,
+  valorDia: Number
+
+   let consumo = bill.lectura_actual - bill.lectura_anterior
+  let valorKw = Math.floor(bill.valor_factura / consumo)
+  let consumoDia = Math.floor(consumo / bill.nochesRentadas)
+  let valorDia = Math.floor(bill.valor_factura / bill.nochesRentadas)
+
+  const jsonString = JSON.stringify(dataFactura)
+
+  let nombre = factura.apto
+
+  let apellido = factura.fecha_actual.split('-')
+  console.log(apellido)
+
+  let nombreArchivo = nombre + '-' + apellido[1] + apellido[0]
+
+  fs.writeFile(`./${nombreArchivo}.txt`, jsonString, (err) => {
+    if (err) {
+      console.error('Error al escribir el archivo:', err);
+      return;
+    }
+    console.log(`Archivo creado exitosamente en ./${nombreArchivo}.txt`);
+  });
+
+  res.send(`Archivo creado exitosamente en ./${nombreArchivo}.txt`)

@@ -1,58 +1,66 @@
 const express = require('express')
-const fs = require('fs')
 const router = express.Router()
+const fs = require('fs')
+const mongoose = require('mongoose')
+const factura = require('../models/aire.js')
 const aptos = require('../UserRepository.js')
 
-
 router.get('/', (req,res) => {
-  res.render('index', {
+  res.render('index')
+})
+
+router.get('/logIn', (req,res) => {
+  res.render('login')
+})
+
+router.get('/logIn/air-e', (req,res) => {
+  res.render('air-e', {
     aptos
   })
 })
 
-router.post('/nuevaFactura', (req,res) => {
+router.get('/logIn/recibosAire', async(req,res) => {
+  const facturas = await factura.find({})
+  res.render('air-eRecibos', {
+    facturas
+  })
+})
 
-  const factura = { ...req.body }
+router.post('/nuevaFactura', async(req,res) => {
 
-  let consumo = factura.lectura_actual - factura.lectura_anterior
-  let valorKw = Math.floor(factura.valor_factura / consumo)
-  let consumoDia = Math.floor(consumo / factura.nochesRentadas)
-  let valorDia = Math.floor(factura.valor_factura / factura.nochesRentadas)
+  const bill = { ...req.body }
 
-  let dataFactura = {
-    apto: factura.apto,
-    fecha_actual: factura.fecha_actual,
-    lectura_actual: factura.lectura_actual,
-    fecha_anterior: factura.fecha_anterior,
-    lectura_anterior: factura.lectura_anterior,
-    dias_facturados: factura.dias_facturados,
-    valor_factura: factura.valor_factura,
-    nochesRentadas: factura.nochesRentadas,
-    consumoTotal: consumo,
-    kwDia: consumoDia,
-    valorKw: valorKw,
-    valorDia: valorDia
-  }
+  let consumo = bill.lectura_actual - bill.lectura_anterior
+  let valorKw = Math.floor(bill.valor_factura / consumo)
+  let consumoDia = Math.floor(consumo / bill.nochesRentadas)
+  let valorDia = Math.floor(bill.valor_factura / bill.nochesRentadas)
+  
+  try {
+    factura.create({ 
+      apto: bill.apto,
+      fecha_actual: bill.fecha_actual,
+      lectura_actual: bill.lectura_actual,
+      fecha_anterior: bill.fecha_anterior,
+      dias_facturados: bill.dias_facturados,
+      valor_factura: bill.valor_factura,
+      nochesRentadas: bill.nochesRentadas,
+      consumoTotal: consumo,
+      kwDia: consumoDia,
+      valorKw: valorKw,
+      valorDia: valorDia
+    })
+  } catch {}
 
-  const jsonString = JSON.stringify(dataFactura)
+  res.redirect('/logIn')
 
-  let nombre = factura.apto
+})
 
-  let apellido = factura.fecha_actual.split('-')
-  console.log(apellido)
+router.get('/logIn/reservas', (req,res) => {
+  res.render('reservas')
+})
 
-  let nombreArchivo = nombre + '-' + apellido[1] + apellido[0]
+router.post('/nuevaReserva', (req, res) => {
 
-  fs.writeFile(`./${nombreArchivo}.txt`, jsonString, (err) => {
-    if (err) {
-      console.error('Error al escribir el archivo:', err);
-      return;
-    }
-    console.log(`Archivo creado exitosamente en ./${nombreArchivo}.txt`);
-  });
-
-  res.send(`Archivo creado exitosamente en ./${nombreArchivo}.txt`)
- 
 })
 
 module.exports = router

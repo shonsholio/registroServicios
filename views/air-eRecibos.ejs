@@ -1,0 +1,28 @@
+<%- include('partials/_headerLogIn') %>
+
+  <div class="col-10">
+
+  <h1>facturas Air-e</h1>
+  <p>Version 1.0</p>
+  
+
+  <table class="table">
+    <tr>
+      <th>Apto</th>
+      <th>Periodo</th>
+      <th>Valor</th>
+    </tr>
+
+    <tr>
+      <td><%= facturas[0].apto %></td>
+      <td><%= facturas[0].fecha_actual %></td>
+      <td><%= facturas[0].valor_factura %></td>
+    </tr>
+
+  </table>
+
+  </div>
+
+
+</body>
+</html>   

@@ -14,10 +14,12 @@
     </tr>
 
     <tr>
-      <td><%= facturas[0].apto %></td>
-      <td><%= facturas[0].fecha_actual %></td>
-      <td><%= facturas[0].valor_factura %></td>
+      <% for (a =0; a < facturas.length; ++a) { %>
+      <td><%= facturas[a].apto %></td>
+      <td><%= facturas[a].fecha_actual %></td>
+      <td><%= facturas[a].valor_factura %></td>
     </tr>
+    <% } %>
 
   </table>
 

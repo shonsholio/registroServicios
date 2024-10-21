@@ -20,7 +20,7 @@ router.get('/logIn/air-e', (req,res) => {
 })
 
 router.get('/logIn/recibosAire', async(req,res) => {
-  const facturas = await factura.find({})
+  const facturas = await factura.find({}).sort({ lectura_actual: -1 })
   res.render('air-eRecibos', {
     facturas
   })
@@ -36,12 +36,13 @@ router.post('/nuevaFactura', async(req,res) => {
       fecha_actual: bill.fecha_actual,
       lectura_actual: bill.lectura_actual,
       fecha_anterior: bill.fecha_anterior,
+      lectura_anterior: bill.lectura_anterior,
       dias_facturados: bill.dias_facturados,
       valor_factura: bill.valor_factura
     })
   } catch {}
 
-  res.redirect('/logIn')
+  res.redirect('/logIn/recibosAire')
 
 })
 

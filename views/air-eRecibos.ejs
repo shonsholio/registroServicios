@@ -9,7 +9,11 @@
   <table class="table">
     <tr>
       <th>Apto</th>
-      <th>Periodo</th>
+      <th>Fecha Actual</th>
+      <th>Lectura Actual</th>
+      <th>Fecha Anterior</th>
+      <th>Lectura Anterior</th>
+      <th>Dias</th>
       <th>Valor</th>
     </tr>
 
@@ -17,6 +21,10 @@
       <% for (a =0; a < facturas.length; ++a) { %>
       <td><%= facturas[a].apto %></td>
       <td><%= facturas[a].fecha_actual %></td>
+      <td><%= facturas[a].lectura_actual %></td>
+      <td><%= facturas[a].fecha_anterior %></td>
+      <td><%= facturas[a].lectura_anterior %></td>
+      <td><%= facturas[a].dias_facturados %></td>
       <td><%= facturas[a].valor_factura %></td>
     </tr>
     <% } %>

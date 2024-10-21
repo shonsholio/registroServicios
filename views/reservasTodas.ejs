@@ -1,0 +1,38 @@
+<%- include('partials/_headerLogIn') %>
+
+  <div class="col-10">
+
+  <h1>reservas Jaussers</h1>
+  <p>Version 1.0</p>
+  
+
+  <table class="table">
+    <tr>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th>Apto</th>
+      <th>Huésped</th>
+      <th>Pax</th>
+      <th>Pago</th>
+      <th>Canal</th>
+    </tr>
+
+    <tr>
+      <% for (a =0; a < reservas.length; ++a) { %>
+      <td><%= reservas[a].checkIn %></td>
+      <td><%= reservas[a].checkOut %></td>
+      <td><%= reservas[a].apto %></td>
+      <td><%= reservas[a].huesped %></td>
+      <td><%= reservas[a].pax %></td>
+      <td>$ <%= reservas[a].valorReserva.toLocaleString() %></td>
+      <td><%= reservas[a].channel %></td>
+    </tr>
+    <% } %>
+
+  </table>
+
+  </div>
+
+
+</body>
+</html>   

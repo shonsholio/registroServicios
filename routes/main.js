@@ -3,6 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 const mongoose = require('mongoose')
 const factura = require('../models/aire.js')
+const book = require('../models/book.js')
 const aptos = require('../UserRepository.js')
 
 router.get('/', (req,res) => {
@@ -46,12 +47,41 @@ router.post('/nuevaFactura', async(req,res) => {
 
 })
 
-router.get('/logIn/reservas', (req,res) => {
-  res.render('reservas')
+router.get('/logIn/nuevaReserva', (req,res) => {
+  res.render('reservas', {
+    aptos
+  })
 })
 
-router.post('/nuevaReserva', (req, res) => {
+router.post('/logIn/nuevaReserva', async(req, res) => {
+  const reserva = { ...req.body }
 
+  try {
+    book.create({
+      apto: reserva.apto,
+      huesped: reserva.huesped,
+      checkIn: reserva.checkIn,
+      checkOut: reserva.checkOut,
+      pax: reserva.pax,
+      valorReserva: reserva.valorReserva,
+      channel: reserva.channel
+    }) 
+  } catch{}
+
+  res.redirect('/logIn')
+})
+
+router.get('/logIn/reservas', async(req,res) => {
+  const reservas = await book.find({}).sort({ checkIn: -1 })
+  res.render('reservasTodas', {
+    reservas
+  })})
+
+router.get('/logIn/reservasTodas', async(req,res) => {
+  const reservas = await book.find({}).sort({ checkIn: -1 })
+  res.render('reservasTodas', {
+    reservas
+  })
 })
 
 module.exports = router

@@ -5,9 +5,61 @@
       <h1>registro Reservas</h1>
       <p>Version 1.0</p>
       
-      <form class="text-center" action="/nuevaReserva" method="post">
+      <form class="text-center" action="/logIn/nuevaReserva" method="post">
+
+        <div class="mt-4">
+          <label for="apto">Apto</label>
+          <select name="apto" class="border-0">
+            Apartamento
+            <% for (x=0; x < aptos.length; ++x) { %>
+              <option value="<%= aptos[x] %>"><%= aptos[x] %></option>  
+              <% } %>
+          </select>
+        </div>
+
+        <div class="mt-2">
+          <label for="huesped">Nombre del huésped</label>
+          <input type="" name="huesped">
+        </div>
+
+        <div class="mt-2">
+          <label for="checkIn">Check In</label>
+          <input type="date" name="checkIn">
+        </div>
+
+        <div class="mt-2">
+          <label for="checkOut">Check Out</label>
+          <input type="date" name="checkOut" placeholder="Check Out">
+        </div>
+
+        <div class="mt-2">
+          <label for="pax">Pax</label>
+          <select name="pax" id="">
+            <option value="">---</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+
+        <div class="mt-2">
+          <label for="valorReserva">Valor Reserva</label>
+          <input type="" name="valorReserva">
+        </div>
+
+        <div class="mt-2">
+          <label for="channel">Canal</label>
+          <select name="channel" id="">
+            <option value="">---------</option>
+            <option value="airbnb">AirBnB</option>
+            <option value="direkto">Direkto</option>
+          </select>
+        </div>  
       
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary mt-3">Guardar</button>
       
       </form>
 

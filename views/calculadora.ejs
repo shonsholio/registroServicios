@@ -1,0 +1,55 @@
+<%- include('partials/_headerLogIn') %>
+  
+    <div class="col-10" id="bodyWeb">
+  
+        <p class="display-2" >calcula AirBnB</p><br>
+
+        <form id="calcForm">
+          <input class="" id="valor" placeholder="valor">
+          <input class="" id="noches" placeholder="# noches">
+          <input class="" id="dcto" placeholder="descuento"> %
+          <button type="submit">calcula</button>
+        </form>
+
+        <br><br>
+        <div id="valorAirBnB"></div>
+        <div id="reservaAirBnB"></div>
+        
+        <br><hr ><br>
+
+        <div id="totEstadia"></div>
+        <div id="ingreso"></div>
+
+  
+    </div>
+  
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('calcForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    let valorr = parseFloat(document.getElementById('valor').value)
+    let nochess = parseFloat(document.getElementById('noches').value)
+    let dctoo = parseFloat(document.getElementById('dcto').value)
+
+    let result = ((valorr * 1.168) * (100 - dctoo)) / 100
+    let estadia = result * nochess
+
+    let ingreso = (((valorr * (100 - dctoo)) * 0.9643) * 0.95) / 100
+    let redondo = Math.round(ingreso)
+    let totEstadia = redondo * nochess
+
+    document.getElementById('valorAirBnB').innerText = 'Precio por Noche: $ ' + result.toLocaleString();
+    document.getElementById('reservaAirBnB').innerText = 'Precio por Estadía: $ ' + estadia.toLocaleString();
+
+
+    document.getElementById('totEstadia').innerText = 'Total ingresos: $ ' + totEstadia.toLocaleString();
+    document.getElementById('ingreso').innerText = 'Valor por noche: $ ' + redondo.toLocaleString();
+
+  })
+</script>
+
+</body>
+</html>   

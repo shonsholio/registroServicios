@@ -84,4 +84,8 @@ router.get('/logIn/reservasTodas', async(req,res) => {
   })
 })
 
+router.get('/logIn/calcula', (req,res) => {
+  res.render('calculadora')  
+  })
+
 module.exports = router

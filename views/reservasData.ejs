@@ -1,0 +1,82 @@
+<%- include('partials/_headerLogIn') %>
+
+<div class="col-10" id="bodyWeb">
+
+  <h1>data Reservas</h1>
+  <p>Version 1.0</p>
+
+  <!-- TOTAL RESERVAS POR MES -->
+
+  <% let meses = [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ] %>
+  <% let mesDays = [ '31', '28', '31', '30', '31', '30', '31', '31', '30', '31', '30', '31' ] %>
+
+  <% let mesArrays = {} %>
+
+  <% meses.forEach(function(mes) { %>
+    <% mesArrays[mes] = [] %>
+  <% }) %>
+    
+  <% fecha = new Date() %>
+  <% diaHoy = fecha.getDate() %>
+  <% mesHoy = fecha.getMonth() + 1 %>
+  <% anoHoy = fecha.getFullYear() %>
+  <% hoy = anoHoy + '-' + mesHoy + '-' + diaHoy %>
+  
+  <% for (x = 0; x < reservas.length; ++x) { %>
+    <% mesCheckIn = reservas[x].checkIn.split('-')[1] %>
+    <% (mesArrays[meses[eval(mesCheckIn - 1)]]).push(reservas[x]) %>
+  <% } %>
+
+
+  <!-- TOTAL INGRESOS POR MES -->
+  
+  <% for (i = mesHoy; i > 0; --i) { %>
+    <p><%= meses[i - 1] %></p>
+    <p>Total Reservas: <%= mesArrays[meses[eval(i - 1)]].length  %></p> <!-- Resultado Reservas -->
+    <% totalMes = [] %>
+    <% mesArrays[meses[eval(i - 1)]].forEach(datis => { %>
+      <% totalMes.push(datis.valorReserva) %>
+      <% sumaMes = totalMes.reduce((acc, arr) => acc + arr, 0) %>
+    <% }) %>
+      
+    <p>Ingresos Mes: $ <%= sumaMes.toLocaleString()  %></p> <!-- Resultado Ingresos -->
+    <% sumaMes = 0 %>
+
+    <!-- TOTAL NOCHES POR MES -->
+    <% totalNoches = [] %>
+    <% mesArrays[meses[eval(i - 1)]].forEach(nits => { %>
+      <% if (nits.checkOut.split('-')[1] === nits.checkIn.split('-')[1]) { %>
+        <% totNoches = nits.checkOut.split('-')[2] - nits.checkIn.split('-')[2] %>
+      <% } else { %>
+        <% day1 = nits.checkOut.split('-')[2] - 1 %>
+        <% mci = nits.checkIn.split('-')[1] - 1 %> <!-- mes de check In-->
+        <% totNoches = (mesDays[eval(mci)] - nits.checkIn.split('-')[2]) + 1 %> <!-- resta de dias-->
+      <% } %>
+
+      <% totalNoches.push(totNoches) %>
+      <% sumaNoches = totalNoches.reduce((acc, arr) => acc + arr, 0) %>
+
+    <% }) %>
+
+      <p>Noches: <%= sumaNoches %> </p>   <!-- Resultado noches -->
+      
+      
+      <!-- % Ocupacion -->
+      
+      <% ocup = (sumaNoches / mesDays[ i - 1]) * 100 %>      <!-- Resultado Ocupacion -->
+      <p>% Ocupación: <%= ocup.toFixed(2) %> %</p>
+      <% sumaNoches = 0 %>
+
+      <hr>
+  <% } %>
+
+
+    
+    
+
+
+      
+</div>
+
+</body>
+</html>   

@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const factura = require('../models/aire.js')
 const book = require('../models/book.js')
 const aptos = require('../UserRepository.js')
+const meses = require('../src/meses.json')
 
 router.get('/', (req,res) => {
   res.render('index')
@@ -86,6 +87,13 @@ router.get('/logIn/reservasTodas', async(req,res) => {
 
 router.get('/logIn/calcula', (req,res) => {
   res.render('calculadora')  
-  })
+})
+
+router.get('/logIn/dataReservas', async(req,res) => {
+  const reservas = await book.find({}).sort({ checkIn: -1 })
+  res.render('reservasData', {
+    reservas,
+    meses
+  })})
 
 module.exports = router

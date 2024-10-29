@@ -1,3 +1,6 @@
+        <!-- <% eval(gaveta).push(reservas[i]) %> -->
+
+  
   nochesRentadas: Number,
   consumoTotal: Number,
   kwDia: Number,

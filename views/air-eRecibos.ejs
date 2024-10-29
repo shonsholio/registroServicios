@@ -25,7 +25,7 @@
       <td><%= facturas[a].fecha_anterior %></td>
       <td><%= facturas[a].lectura_anterior %></td>
       <td><%= facturas[a].dias_facturados %></td>
-      <td><%= facturas[a].valor_factura %></td>
+      <td>$ <%= facturas[a].valor_factura.toLocaleString() %></td>
     </tr>
     <% } %>
 

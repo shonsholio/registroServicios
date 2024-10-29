@@ -35,6 +35,7 @@ router.post('/nuevaFactura', async(req,res) => {
   try {
     factura.create({ 
       apto: bill.apto,
+      operador: bill.operador,
       fecha_actual: bill.fecha_actual,
       lectura_actual: bill.lectura_actual,
       fecha_anterior: bill.fecha_anterior,

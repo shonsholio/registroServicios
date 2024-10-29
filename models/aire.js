@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const UserScheme = new mongoose.Schema({
   apto: String,
+  operador: String,
   fecha_actual: String,
   lectura_actual: Number,
   fecha_anterior: String,

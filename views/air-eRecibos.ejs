@@ -9,6 +9,7 @@
   <table class="table">
     <tr>
       <th>Apto</th>
+      <th>Operador</th>
       <th>Fecha Actual</th>
       <th>Lectura Actual</th>
       <th>Fecha Anterior</th>
@@ -20,6 +21,7 @@
     <tr>
       <% for (a =0; a < facturas.length; ++a) { %>
       <td><%= facturas[a].apto %></td>
+      <td><%= facturas[a].operador %></td>
       <td><%= facturas[a].fecha_actual %></td>
       <td><%= facturas[a].lectura_actual %></td>
       <td><%= facturas[a].fecha_anterior %></td>
